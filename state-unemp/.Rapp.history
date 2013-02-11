@@ -1,0 +1,260 @@
+library(ArmaUtils)
+ufun_Atta_L(Res,w,s,pars)
+ufun_Atta_L(Res,w,0,pars)
+1:5 %in% 0:2
+3 %in% 0:2
+all(1:5 %in% 0:2)
+any(1:5 %in% 0:2)
+help(any)
+error("bum")
+library(ArmaUtils)
+ufun_Atta_L(Res,w,0,pars)
+ufun_Atta_L(Res,w,0.5,pars)
+pars <- list(alpha=0.3,gamma=1.4,cutoff=0.1,mu=0.9,theta=0.3,phival=0.8)
+w <- runif(4,min=1,max=4)
+library(ArmaUtils)
+Res  <- outer(1:4,5:-1)
+ufun_Atta_L(Res,w,0,pars)
+ufun_Atta_L(Res,w,0.8,pars)
+ufun_Atta_L(Res,w,rnorm(14),pars)
+pars
+w
+cc <- ufun_Atta_L(Res,w,0.2,pars)	# error
+cc <- ufun_Atta_L(Res,w,0,pars)
+rr <- ufun_labouR_h(Res,w,0,pars) 	# same function in R
+source("~git/ArmaUtils/tests/rtests.r")
+source("~git/ArmaUtils/inst/rtests.r")
+source("~/git/ArmaUtils/inst/rtests.r")
+rr <- ufun_labouR_h(Res,w,0,pars) 	# same function in R
+source("/tmp/r-plugin-florianoswald/Rsource-1621-rtests.r")
+rr <- ufun_labouR_h(Res,w,0,pars) 	# same function in R
+all.equal(cc$utility,rr$utility)	# TRUE
+all.equal(cc$cons,rr$cons)	# TRUE
+all.equal(cc$labo,rr$labo)	# TRUE
+library(ArmaUtils)
+ufun_Atta_L
+ufun_Atta_L2
+pars <- list(alpha=0.3,gamma=1.4,cutoff=0.1,mu=0.9,theta=0.3,phival=0.8)
+Res  <- outer(seq(1,4,le=1000),seq(5,-1,le=100))
+s <- sample(0:2,size=nrow(Res),replace=TRUE)
+w <- runif(nrow(Res),min=1,max=4)
+f = ufun_Atta_L(Res,w,s,pars)
+f2 = ufun_Atta_L2(Res,w,s,pars)
+all.equal(f,f2)
+head(f$utility)
+all.equal(f$utility,f2$utility)
+all.equal(f$consumption,f2$consumption)
+all.equal(f$labour,f2$labour)
+setwd("~/Dropbox/bankruptcy/data/NYFed")
+dta <- read.csv(file="bk_pc_state.csv")
+names(dta)[-1] <- paste(1999:2010)
+library(xlsx)
+bk <- read.xlsx(file="../USCourts/930_PerCapitaFilings.xls",sheetIndex=3,header=FALSE)
+names(bk) <- c("State","rate")
+load("~/git/Rtools/states-abbrev.RData")
+bk <- merge(bk,abbr,id="State")
+bk$State <- NULL
+names(bk) <- c("rate","State")
+bkch <- read.xlsx(file="../USCourts/930_PerCapitaFilings.xls",sheetName="by.chapter")
+bkch <- merge(bkch,abbr,id="State")
+bkch$State <- NULL
+names(bkch)[4] <- c("State")
+state.ex <- read.csv("state-ex.csv",header=TRUE)
+names(state.ex)[1] <- "State"
+ls()
+dta
+ls()
+bk <- merge(bk,state.ex,by="State")
+bk
+ls()
+state.ex
+library(UScensus2000)
+state.ex <- read.csv("mitman-data.csv",header=TRUE)
+state.ex
+str(state.ex)
+ex.rec <- read.csv("mitman-data.csv",header=TRUE)
+names(ex.rec) <- c("State","Deficiency","Home.Exemption","Fed.Allowed")
+ex.rec$State <- as.character(ex.rec$State)
+ex.rec
+gsub(",", "", ex.rec$Home.Exemption, fixed = TRUE)
+ex.rec$Home.Exemption <- gsub(",", "", ex.rec$Home.Exemption, fixed = TRUE)
+ex.rec
+bk
+load("~/git/Rtools/states-abbrev.RData")
+ex.rec <- merge(ex.rec,abbr,id="State")
+ex.rec
+help(worksheet)
+library(xlsx)
+help(package="xlsx")
+setwd("~/Dropbox/bankrutpcy/data/BLS")
+setwd("~/Dropbox/bankruptcy/data/BLS")
+length(system("ls")
+)
+length(system("ls state-unemp"))
+system("ls state-unemp")
+list.files(path="./state-unemp")
+files <- list.files(path="./state-unemp")
+files
+files[4]
+setwd("~/Dropbox/bankruptcy/data/BLS/state-unemp")
+files <- list.files(path=".")
+files
+wb = loadWorkbook(files[1])
+getCellValue(B6)
+getCells(row=6,colIndex=1)
+cell = getCells(row=6,colIndex=1)
+sheet = getSheets(wb)
+sheet
+mysheet = sheets[['BLS Data Series']]
+mysheet = sheet[['BLS Data Series']]
+mysheet
+cells = getCells(6,1)
+rows = getRows(mysheet,6)
+rows = getRows(mysheet,rowIndex=6)
+rows
+cells = getCells(rows,colIndex=1)
+cells
+getCellValue(cells)
+values = lapply(cells,getCellValue)
+getCellValue(cell=cells)
+cells
+getCellValue(cell=cells$6.1)
+getCellValue(cell=cells$`6.1`)
+cells[[1]]
+cells[[2]]
+getCellValue(cell=cells[[1]])
+str(cells)
+file <- system.file("tests", "test_import.xlsx", package = "xlsx")#
+#
+wb <- loadWorkbook(file)  #
+sheets <- getSheets(wb)#
+#
+sheet <- sheets[['mixedTypes']]      # get second sheet#
+rows  <- getRows(sheet)   # get all the rows#
+#
+cells <- getCells(rows)   # returns all non empty cells#
+#
+values <- lapply(cells, getCellValue) # extract the values
+values
+wb = loadWorkbook(files[1])
+wb
+sheet = getSheets(wb)
+mysheet = sheet[['BLS Data Series']]
+rows = getRows(mysheet)
+cells=getCells(rows,colIndex=1)
+lapply(cells,getCellValue)
+rows = getRows(mysheet,rowIndex=6)
+cells = getCells(rows,colIndex=2)
+getCellValue(cells)
+rows = getRows(mysheet)
+sheet = getSheets(wb)
+rows = getRows(mysheet)
+cells=getCells(rows,colIndex=2)
+cells
+getCellValue(cells)
+getCellValue(cell=cells)
+vals = lapply(cells,getCellValue)
+vals
+vals[[2]]
+dat = read.xlsx(files[1],rowIndex=12)
+dat = read.xlsx(files[1],sheetIndex=1,rowIndex=12)
+dat
+warnings()
+dat = read.xlsx(files[1],sheetName="BLS Data Series",rowIndex=12)
+help(read.xlsx)
+dat = read.xlsx(files[1],sheetName="BLS Data Series",rowIndex=12:44,colIndex=1:13)
+dat
+rm(list=ls(all=T))
+library(xlsx)
+setwd("~/Dropbox/bankruptcy/data/BLS/state-unemp")
+files <- list.files(path=".")
+files
+states <- list()
+st.names <- c()
+source("/tmp/r-plugin-florianoswald/Rsource-9865-getunemp.r")
+source("/tmp/r-plugin-florianoswald/Rsource-9865-getunemp.r")
+i=1
+tmp         <- loadWorkbook(files[i])
+sheets      <- getSheets(tmp)
+rows        <- getRows(sheet=sheets)
+mysheet     <- getSheets(tmp)
+mysheet
+rows        <- getRows(sheet=mysheet)
+mysheet     <- mysheet[['BLS Data Series']]
+rows        <- getRows(sheet=mysheet)
+cells       <- getCells(rows,colIndex=2)
+vals        <- lapply(cells,getCellValue)
+st.names[i] <- vals[[2]]	# that's the current state
+states[[i]] <- read.xlsx(files[i],sheetName="BLS Data Series",rowIndex=12:44,colIndex=1:13)
+source("/tmp/r-plugin-florianoswald/Rsource-9865-getunemp.r")
+names(states) <- st.names
+states
+str(states$Wyoming)
+rowMeans(states$Wyoming)
+rowMeans(states$Wyoming[,-1])
+yrly <- lapply(states,function(x) cbind(x[,1],rowMeans(x[,-1])))
+yrly
+yrly <- lapply(states,function(x) data.frame(year=x[,1],unemp.rate=rowMeans(x[,-1])))
+yrly
+names(yrly)
+st.names
+unlist(states)
+library(zoo)
+yrz <- lapply(yrly,function(z) zoo(x=z$unemp.rate,z$year))
+yrz
+cbind(yrz$Virginia,yrz$Washington)
+c(yrz$Virginia,yrz$Washington)
+cbind(unlist(yrz))
+cbind(yrz)
+yrz)
+yrz
+yrz.all <- c()
+for (i in 1:length(yrz)) yrz.all <- cbind(yrz.all,yrz[[i]])
+yrz.all <- yrz[[1]]
+for (i in 2:length(yrz)) yrz.all <- cbind(yrz.all,yrz[[i]])
+yrz.all
+yrz.all <- yrz[[1]]
+yrz.all
+cbind(yrz.all,yrz[[2]])
+yrz.all = cbind(yrz.all,yrz[[2]])
+cbind(yrz.all,yrz[[3]])
+yrz.all <- yrz[[1]]
+source("/tmp/r-plugin-florianoswald/Rsource-9865-getunemp.r")
+yrz.all
+yrz.all <- yrz[[1]]
+i = 2
+yrz.all <- cbind(yrz.all,yrz[[i]])
+yrz.all
+i = 3
+yrz.all <- cbind(yrz.all,yrz[[i]])
+i=4
+yrz.all <- cbind(yrz.all,yrz[[i]])
+yrz.all
+yrz.all <- yrz[[1]]
+source("/tmp/r-plugin-florianoswald/Rsource-9865-getunemp.r")
+yrz.all
+help(cbind)
+str(yrz.all)
+rownames(yrz.all)
+colnames(yrz.all)
+colnames(yrz.all) <- st.names
+yrz.all
+str(yrz)
+as.data.frame(yrz.all)
+yrz.all
+str(yrz.all)
+library(reshape)
+m <- melt(yrz.all,id.vars=c(index(yrz.all)))
+m
+ydf <- as.data.frame(yrz.all)
+ydf$year <- rownames(ydf)
+ydf
+rownames(ydf) <- NULL
+ydf
+m <- melt(ydf,id.vars=year)
+m <- melt(ydf,id.vars="year")
+m
+names(m) <- c("Year","State","unemp.rate")
+m
+head(m)
+save(m,states,yrly,yrz.all,ydf,file="../unemp.RData")
