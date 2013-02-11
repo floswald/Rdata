@@ -6,7 +6,8 @@ FRED data
 ---------
 
 ### CPI
-* data in [fred-cpi.xls](fred-cpi.xls)
+* raw data in [fred-cpi.xls](fred-cpi.xls)
+* cpi.Rdata: zoo object with CPI
 * source: [http://research.stlouisfed.org/fred2/graph/?g=eH4](CPI U monthly series)
 
 
