@@ -38,6 +38,21 @@ for (i in 2:length(yrz)) {
 	yrz.all <- cbind(yrz.all,yrz[[i]],deparse.level=0)
 }
 
+states.ts <- lapply(states,function(j) ts(unlist(j[,-1]),start=1981,frequency=12))
+
+# make quarterly data out of monthly unemployment data.
+unemps <- lapply(states.ts, function(j) aggregate(as.zoo(j),as.yearqtr,mean))
+unemp <- cbind(data.frame(Date=time(unemps[[1]])),as.numeric(unemps[[1]]))
+for (i in 2:length(unemps)) unemp <- cbind(unemp,as.numeric(unemps[[i]]))
+names(unemp) <- c("Date",names(states.ts))
+format(unemp$Date, "%Y Q%q")
+unemp$Date <- as.Date(unemp$Date)
+unemp <- melt(unemp,"Date")
+unemp.qtrly <- unemp
+names(unemp.qtrly) <- c("Date","State","unemp")
+
+
+
 colnames(yrz.all) <- st.names
 ydf               <- as.data.frame(yrz.all)
 ydf$year          <- rownames(ydf)
@@ -45,4 +60,4 @@ rownames(ydf)     <- NULL
 m                 <- melt(ydf,id.vars="year")
 names(m)          <- c("Year","State","unemp.rate")
 
-save(m,states,yrly,yrz.all,ydf,file="~/git/Rdata/out/unemp.RData")
+save(m,states.ts,yrly,yrz.all,ydf,unemp.qtrly,file="~/git/Rdata/out/unemp.RData")
