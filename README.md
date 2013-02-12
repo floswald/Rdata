@@ -29,6 +29,32 @@ BLS unemployment rates from 1981-2011 by US state
 * unemp.RData: several data.frames that contain the data in different forms.
 
 
+American Bankruptcy Institute Annual Filings rates by state over time
+------------------------------------------------------
+* getrates.r
+* Filings-by-state.RData
+
+
+US Census
+---------
+
+## median income by state over time
+* getmedinc.r
+* medinc.RData
+
+## population estimates by state over time
+* getpop.r
+* pop2000s.RData
+
+Federal Housing Finance Administration House price index
+---------
+
+* data from [http://www.fhfa.gov/Default.aspx?Page=87](www.fhfa.gov)
+* getFHFA.r
+* fhfa.RData
+
+
+
 
 
 

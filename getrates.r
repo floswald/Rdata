@@ -24,5 +24,6 @@ for (i in 2:length(years)){
 	all.y <- rbind(all.y,years[[i]])
 }
 
-save(all.y,file="out/Filings-by-state.RData")
+bk.rates <- all.y
+save(bk.rates,file="out/Filings-by-state.RData")
 
