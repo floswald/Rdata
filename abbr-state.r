@@ -1,11 +1,11 @@
 
 
 # make data.table of states names and abbreviationas
-setwd("~/Dropbox/git/Rtools")
+setwd("~/git/Rdata")
 
 library(data.table)
-abbr <- data.table(read.csv("~/Dropbox/git/Rtools/states-abbrev.csv"))
+abbr <- data.table(read.csv("raw/states-abbrev.csv"))
 
-save(abbr,file="states-abbrev.RData")
+save(abbr,file="out/states-abbrev.RData")
 
 

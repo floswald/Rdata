@@ -14,7 +14,7 @@ library(xlsx)
 library(zoo)
 library(reshape)
 
-setwd("~/git/Rtools/data/state-unemp")
+setwd("~/git/Rdata/raw/state-unemp")
 files <- list.files(path=".")
 
 states <- list()
@@ -45,4 +45,4 @@ rownames(ydf)     <- NULL
 m                 <- melt(ydf,id.vars="year")
 names(m)          <- c("Year","State","unemp.rate")
 
-save(m,states,yrly,yrz.all,ydf,file="../unemp.RData")
+save(m,states,yrly,yrz.all,ydf,file="~/git/Rdata/out/unemp.RData")
