@@ -38,11 +38,11 @@ American Bankruptcy Institute Annual Filings rates by state over time
 US Census
 ---------
 
-## median income by state over time
+### median income by state over time
 * getmedinc.r
 * medinc.RData
 
-## population estimates by state over time
+### population estimates by state over time
 * getpop.r
 * pop2000s.RData
 
