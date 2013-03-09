@@ -28,5 +28,10 @@ for (i in 1:length(years)){
 }
 
 names(tabs) <- paste("y",years,sep="")
-ownership <- rbindlist(tabs)
-save(ownership,file="out/Ownership.RData")
+ownership.state.year <- rbindlist(tabs)
+
+# get ownership by age from SCF
+library(foreign)
+ownership.age = read.dta("~/Dropbox/bankruptcy/data/PhilFed/scf/ownership.dta")
+
+save(ownership.state.year,ownership.age,file="out/Ownership.RData")
