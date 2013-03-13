@@ -16,4 +16,6 @@ names(pop) <- c("State",paste(2000:2010))
 lpop <- melt(pop,"State")
 names(lpop) <- c("State","Year","population")
 
-save(lpop,pop,file="out/pop2000s.RData")
+pop <- list(wide=pop,long=lpop)
+
+save(pop,file="out/pop2000s.RData")

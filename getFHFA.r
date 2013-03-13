@@ -17,4 +17,6 @@ fhfa$Date    <- as.Date(as.yearqtr(fhfa$Date))
 fhfa <- data.table(fhfa)
 yfhfa <- fhfa[,list(hpi=mean(hpi)),by=list(State,year(Date))]
 
-save(fhfa,yfhfa,file="out/fhfa.RData")
+fhfa <- list(qtr=fhfa,yr=yfhfa)
+
+save(fhfa,file="out/fhfa.RData")

@@ -3,6 +3,9 @@
 
 rm(list=ls(all=T))
 setwd("~/git/Rdata")
+source("~/git/Rtools/tools.r")
+library(data.table)
+library(reshape)
 
 library(zoo)	# date utilities
 
@@ -21,17 +24,25 @@ dat$FL <- rowMeans(dat[,7:8],na.rm=TRUE)
 dat    <- dat[,!names(dat) %in% c("YEAR","CA.Los.Angeles","CA.San.Diego","CA.San.Francisco","FL.Miami","FL.Tampa")]
 
 # setup zoo structure
-case.shiller  <- zoo(dat[,!names(dat) %in% "Date"],dat$Date)
-sp            <- strsplit(names(case.shiller),split="\\.")
+cs.mnth  <- zoo(dat[,!names(dat) %in% "Date"],dat$Date)
+sp            <- strsplit(names(cs.mnth),split="\\.")
 states        <- unlist(lapply(1:length(sp),function(x) sp[[x]][1]))	# states are first element
 states[16:17] <- c("Comp10","Comp20")
-names(case.shiller) <- states
+names(cs.mnth) <- states
 # aggregate to quarterly data
-cs.qtr <- aggregate(case.shiller,as.yearqtr,mean,na.rm=TRUE)
+cs.qtr <- aggregate(cs.mnth,as.yearqtr,mean,na.rm=TRUE)
 
-# convert into data.frame 'qhp' (quarterly house price)
+# aggregate to annual data
+cs.yr <- aggregate(cs.mnth,as.year,mean,na.rm=TRUE)
+
+# convert to data.frame for long
+
+
+
 cs.qtr <- cbind(data.frame(Date=time(cs.qtr)),as.matrix(cs.qtr))
 format(cs.qtr$Date, "%Y Q%q")
 cs.qtr$Date <- as.Date(cs.qtr$Date)
 
-save(case.shiller,cs.qtr,file="out/case-shiller.RData")
+case.shiller <- list(mnth=cs.mnth,qtr=cs.qtr,yr=cs.yr)
+
+save(case.shiller,file="out/case-shiller.RData")

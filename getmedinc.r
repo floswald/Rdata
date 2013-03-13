@@ -5,6 +5,7 @@
 rm(list=ls(all=T))
 library(xlsx)
 library(reshape)
+library(data.table)
 
 setwd("~/git/Rdata")
 
@@ -19,4 +20,6 @@ lsemed      <- melt(semedinc,id.vars=c("State"))
 names(lmed) <- c("State","Year","medinc")
 lmed$se     <- lsemed$value
 
-save(medinc,semedinc,lmed,file="out/medinc.RData")
+medinc <- list(wide=data.table(medinc),long=data.table(lmed),se.side=data.table(semedinc),se.long=data.table(lsemed))
+
+save(medinc,file="out/medinc.RData")

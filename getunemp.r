@@ -13,6 +13,7 @@ rm(list=ls(all=T))
 library(xlsx)
 library(zoo)
 library(reshape)
+library(data.table)
 
 setwd("~/git/Rdata/raw/state-unemp")
 files <- list.files(path=".")
@@ -39,7 +40,7 @@ for (i in 2:length(yrz)) {
 }
 
 states.ts <- lapply(states,function(j) ts(unlist(j[,-1]),start=1981,frequency=12))
-stop()
+      
 # make quarterly data out of monthly unemployment data.
 unemps <- lapply(states.ts, function(j) aggregate(as.zoo(j),as.yearqtr,mean))
 unemp <- cbind(data.frame(Date=time(unemps[[1]])),as.numeric(unemps[[1]]))
@@ -60,4 +61,8 @@ rownames(ydf)     <- NULL
 m                 <- melt(ydf,id.vars="year")
 names(m)          <- c("Year","State","unemp.rate")
 
-save(m,states.ts,yrly,yrz.all,ydf,unemp.qtrly,file="~/git/Rdata/out/unemp.RData")
+unemp <- list(long.mnth=data.table(m),wide.mnth=data.table(ydf),zoo.wide.mnth=yrz.all,long.qtr=data.table(unemp.qtrly))
+
+
+
+save(unemp,file="~/git/Rdata/out/unemp.RData")
