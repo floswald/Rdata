@@ -4,6 +4,8 @@
 # NYFed default and bankruptcy data
 # =================================
 
+# obtained at http://www.newyorkfed.org/householdcredit/
+
 # definitions:
 # bal90   : percentage of population 90+ days late on balance (=>" bankruptcy") and
 # mort90  : percentage of population 90+ days late on mortgage (=> "default")
