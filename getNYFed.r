@@ -4,7 +4,7 @@
 # NYFed default and bankruptcy data
 # =================================
 
-# obtained at http://www.newyorkfed.org/householdcredit/
+# obtained at http://www.newyorkfed.org/research/data_indicators/household_index.html
 
 # definitions:
 # bal90   : percentage of population 90+ days late on balance (=>" bankruptcy") and
@@ -16,6 +16,8 @@
 rm(list=ls(all=T))
 setwd("~/git/Rdata")
 library(xlsx)
+library(reshape)
+library(zoo)
 
 sheets <- c(37,39,45,47)
 rows <- list(3:15,3:15,4:16,4:16)
@@ -46,7 +48,16 @@ for (i in 1:4){
 NYFed <- cbind(tables[[1]],tables[[2]]$value,tables[[3]]$value,tables[[4]]$value)
 names(NYFed) <- c("Date","State",names(tables))
 
-save(NYFed,file="out/NYFed.RData")
 
 
+tables[[5]] <- read.xlsx(file="raw/HHD_C_Report_2012Q3.xls",sheetIndex=25,rowIndex=3:5,colIndex=1:41)
+tables[[5]] <- ts(t(tables[[5]][,-1]),start=2003,frequency=4)
+colnames(tables[[5]]) <- c("new.foreclosure","new.bankruptcy")
+dates <- as.Date(as.yearqtr(time(tables[[5]])))
+tables[[5]] <- as.data.frame(tables[[5]])
+tables[[5]]$Date <- dates
+tables[[5]][,c(1,2)] <- tables[[5]][,c(1,2)] * 1000
 
+agg.bk.fore <- tables[[5]]
+
+save(NYFed,agg.bk.fore,file="out/NYFed.RData")
