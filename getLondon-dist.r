@@ -1,6 +1,7 @@
 
 
 # London Income distribution
+# download data from http://data.london.gov.uk/visualisations/fol-2010-income-report-data.xls
 
 library(xlsx)
 
