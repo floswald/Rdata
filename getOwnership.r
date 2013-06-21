@@ -1,5 +1,6 @@
 
 # get ownership rates by state over time
+# source: https://www.census.gov/housing/hvs/data/rates/
 
 rm(list=ls(all=T))
 library(xlsx)

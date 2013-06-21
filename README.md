@@ -46,6 +46,10 @@ US Census
 * getpop.r
 * pop2000s.RData
 
+### ownership rates by US state over time
+* getOwnership.r
+* Ownership.RData
+
 Federal Housing Finance Administration House price index
 ---------
 
