@@ -1,4 +1,5 @@
 
+# for county level data: http://www.bls.gov/lau/laucnty11.txt
 
 
 # get a dataset of unemployment rates by US states over time from a bunch of excel files

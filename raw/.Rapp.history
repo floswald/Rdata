@@ -1,0 +1,250 @@
+z2[,house.price := value/v06, by=list(CountyName,State)]
+z2[,v06 := NULL]
+z2[,periods := length(value),by=list(CountyName,State)]
+source("/tmp/r-plugin-florianoswald/Rsource-1430-prepare-acs2.r")
+tx <- z2[State=="TX"]
+m <- matrix(tx[periods>=7&year>2005,house.price],nrow=7,ncol=nrow(tx[periods>=7&year>2005]))
+s <- sample(2:ncol(m),200,replace=FALSE)
+ms <- m[,c(1,s)]
+plot(2006:2012,m[,1],type="l",col="gray",ylim=range(m[6,]))
+for (i in 1:length(s)) lines(2006:2012,m[,s[i]],col="gray")
+z2[,periods := NULL]
+key(z2)
+setkey(z2,CountyName,State,year)
+z
+z2
+setwd("~/datasets/Geo-shapes/")
+d <- fread(input="zip-county.csv")
+d
+d <- fread(input="zip-county.csv")
+d
+setwd("~/git/Rdata/raw")
+d <- fread(input="zip-county.csv")
+d
+zip <- d
+zip[,c("pop10","afact") := NULL]
+zip
+setkey(zip,zcta5)
+m <- list(zip.pop=d,zip=zip)
+save(m,file="../out/zip-county.RData")
+z2
+zz
+zip
+setnames(zip,"zcta5","RegionName")
+setkey(zip,RegionName)
+key(zz)
+setkey(zz,RegionName)
+zip[zz]
+str(zip)
+d
+zip
+d <- fread(input="zip-county.csv")
+d[,zcta5 := as.integer(zcta5)]
+zip <- d
+zip[,c("pop10","afact") := NULL]
+setkey(zip,zcta5)
+m <- list(zip.pop=d,zip=zip)
+save(m,file="../out/zip-county.RData")
+zip
+setnames(zip,"zcta5","RegionName")
+setkey(zip,RegionName)
+key(zz)
+zz[zip]
+zz
+zip[zz]
+str(zz)
+zip[zz]
+zz = zillow.files$Zhvi_AllHomes
+setnames(zz,"RegionName","zcta5")
+setkey(zz,zcta5)
+key(zip)
+zip
+load("~/git/Rdata/out/zip-county.RData")
+zip
+setnames(zip,"RegionName","zcta5")
+setkey(zip,zcta5)
+zz <- zip[zz]
+zz
+zz[,table(county)]
+zz
+w
+z
+zzz <- melt(zz[,c(2,3,5:ncol(zz)),with=FALSE],c("State","CountyName","county"))
+zz
+zzz <- melt(zz[,c(2,4,6:ncol(zz)),with=FALSE],c("State","CountyName","county"))
+zzz <- zzz[complete.cases(zzz),]
+head(zzz)
+names(zzz)[4] <- "time"
+z2 <- data.table(zzz)
+str(z2)
+z2[,time := as.character(time)]
+z2[,State := as.character(State)]
+z2[,CountyName := as.character(CountyName)]
+z2[,time := as.Date(paste("1",time),format="%d %b %Y")]
+z2[,year := year(time)]
+z2
+z2[,id := paste(tolower(CountyName),State,sep="_")]
+z2[,length(unique(id))]
+z2[,length(unique(county))]
+z2[,summary(id)]
+z2[,table(id)]
+z2
+z2[,cor(county,id)]
+str(z2)
+z2[,unique(id)]
+z2
+idx <- data.table(num=1:930,id=z2[,unique(id)],key=id)
+idx <- data.table(num=1:930,id=z2[,unique(id)],key=id)
+idx <- data.table(num=1:930,id=z2[,unique(id)])
+idx
+str(idx)
+setkey(idx,id)
+idx[z2]
+key(z2)
+setkey(z2,id)
+idx[z2]
+z3 <- copy(idx[z2])
+z3[,county:= as.numeric(county)]
+str(z3)
+z3[,cor(num,county)]
+z3[,cov(num,county)]
+z3[,list(num,county)]
+z3[,length(unique(county))]
+zz
+z2
+z2[,id:=NULL]
+z2 <- z2[,list(value=mean(value,na.rm=T)),by=list(CountyName,county,State,year)]
+z2
+z2[,st.value := mean(value,na.rm=T),by=list(State,year)]
+z2[,sdlogp := sd(diff(log(st.value)),na.rm=T),by=State]	# join that info with mitmans legal environment table.
+v06 <- z2[year==2006,list(v06=value),by=list(county)]
+v06
+setkey(v06,county)
+setkey(z2,county)
+z2[v06]
+v06[z2]
+v06[,table(county)]
+v06 <- z2[year==2006,list(v06=value)]
+setkey(v06,county)
+setkey(z2,county)
+v06 <- z2[year==2006,list(v06=value,county)]
+setkey(v06,county)
+setkey(z2,county)
+z2 <- z2[v06]
+v06 <- z2[year==2006,list(v06=value),by=list(CountyName,State)]
+v06
+v06[State=="AL"]
+setkey(z2,CountyName,State)
+z2
+z2[State=="AL"]
+z2[State=="AL"&year==2006]
+zz
+z2
+zzz <- melt(zz[,c(2,4,6:ncol(zz)),with=FALSE],c("State","CountyName"))
+warnings()
+head(zz)
+zzz <- melt(zz[,c(4,6:ncol(zz)),with=FALSE],c("State","CountyName"))
+zzz <- zzz[complete.cases(zzz),]
+head(zzz)
+z2 <- data.table(zzz)
+z2[,time := as.character(time)]
+z2
+names(zzz)[3] <- "time"
+z2 <- data.table(zzz)
+z2
+z2[,time := as.character(time)]
+z2[,State := as.character(State)]
+z2[,CountyName := as.character(CountyName)]
+str_extract("Jul 1996","[0-9]")
+str_extract("Jul 1996","[0-9]&")
+str_extract("Jul 1996","\\d")
+help(str_extracty)
+help(str_extract)
+str_extract("Jul 1996","[0-9]+")
+z2[,year := str_extract(time,"[0-9]+")]
+z2
+z2[,year := as.numeric(year)]
+zz[CountyName=="Hampden"]
+z2 <- z2[,list(value=mean(value,na.rm=T)),by=list(CountyName,State,year)]
+z2
+setkey(z2,CountyName)
+z2[.(Hampden)]
+z2[.('Hampden')]
+z2[,st.value := mean(value,na.rm=T),by=list(State,year)]
+z2[,sdlogp := sd(diff(log(st.value)),na.rm=T),by=State]	# join that info with mitmans legal environment table.
+v06 <- z2[year==2006,list(v06=value),by=list(CountyName,State)]
+v06
+v06 <- z2[year==2006,list(v06=value),by=list(CountyName,State,year)]
+v06
+setkey(v06,CountyName,State,year)
+setkey(z2,CountyName,State,year)
+z2[v06]
+z2
+setkey(v06,CountyName,State)
+setkey(z2,CountyName,State)
+z2[v06]
+v06 <- z2[year==2006,list(v06=value),by=list(CountyName,State)]
+setkey(v06,CountyName,State)
+setkey(z2,CountyName,State)
+z2[v06]
+z2 <- z2[v06]
+z2[,house.price := value/v06, by=list(CountyName,State)]
+z2[.("Hampden")]
+z2[.("Ada")]
+z2[.("Yuma")]
+z2[,v06 := NULL]
+z2[,periods := length(value),by=list(CountyName,State)]
+m <- matrix(z2[periods>=7&year>2005,house.price],nrow=7,ncol=nrow(z2[periods>=7&year>2005]))
+s <- sample(2:ncol(m),200,replace=FALSE)
+ms <- m[,c(1,s)]
+plot(2006:2012,m[,1],type="l",col="gray",ylim=range(ms[6,]))
+for (i in 1:length(s)) lines(2006:2012,m[,s[i]],col="gray")
+z2[,periods := NULL]
+z
+ec
+help(str_extract)
+str_extract("autuga county","^ county")
+str_extract("autuga county","$county")
+str_extract("autuga county","^county")
+str_extract("autuga county","^((county).*)$")
+str_extract("autuga county","^((county))$")
+str_extract("autuga county","\\w$")
+str_extract("autuga county","\\w+$")
+str_extract("autuga county","^(?!county).*$")
+str_extract("autuga county","^(?!county).*$",perl=TRUE)
+str_extract("autuga county","^(?!county).*$",fixed=FALSE)
+grepl("^(?!hede).*$", "hede", perl = TRUE)
+gsub(" county","","autuga nova county")
+ec
+s
+s=ec[,tolower(unlist(strsplit(county,"\\,")))]
+ec[,State := s[which(1:length(s) %% 2==0)]]
+s
+ec[,cnty  := s[which(1:length(s) %% 2==1)]]
+ec[,cnty  := gsub(" county","",cnty)]
+ec
+ec[,cnty  := str_trim(cnty)]
+ec
+ec[,State := str_trim(State)]
+abbr[,State := tolower(State)]
+setkey(abbr,State)
+setkey(ec,State)
+ec <- copy(abbr[ec])
+setkey(ec,FIPS)
+ec <- copy(ec[lh])
+ec[,c("State.1","Abbreviation.1","county.1","cnty.1") := NULL]
+ec
+z <- ec[w]
+z
+z2
+z
+z[,State := NULL]
+setnames(z,"Abbreviation","State")
+z
+z[,county:=NULL]
+setnames(z,"cnty","county")
+z
+setkey(z,State,county)
+key(z2)
+z2
+rm(list=ls(all=T))

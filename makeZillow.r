@@ -1,4 +1,5 @@
 
+# http://www.zillowblog.com/research/data/
 
 # make zillow datasets
 
@@ -41,6 +42,8 @@ names(melts) <- flist.names
 
 stop()
 
+
+# make zip level house values
 
 z <- data.table(read.csv(file="~/Dropbox/bankruptcy/data/zillow/Zip_Zhvi_AllHomes.csv"))
 dates <- gsub("X","",names(z)[-(1:5)])
