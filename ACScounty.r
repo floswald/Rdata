@@ -71,7 +71,7 @@ tmp$name <- as.character(tmp$name)
 tmp[2,1] <- "GEO.display.label"
 
 # mynames must be in order of tmp's index
-mynames <- c("FIPS","county","remove","ind-agric","ind-construc","inf-manufact","ind-wholesale","ind-retail","ind-transport","ind-information","ind-finance","ind-scientific","ind-educational","ind-arts","ind-other.industry","ind-public.admin","median.earnings")
+mynames <- c("FIPS","county","remove","ind-agric","ind-construc","ind-manufact","ind-wholesale","ind-retail","ind-transport","ind-information","ind-finance","ind-scientific","ind-educational","ind-arts","ind-other.industry","ind-public.admin","median.earnings")
 
 ec <- data.table(read.csv(file=dataf))
 ec[,names(ec)[!names(ec) %in% tmp$name] := NULL,with=FALSE]
@@ -196,7 +196,7 @@ tmp$name <- as.character(tmp$name)
 tmp[2,1] <- "GEO.display.label"
 
 # mynames must be in order of tmp's index
-mynames <- c("FIPS","county","remove","ind-agric","ind-construc","inf-manufact","ind-wholesale","ind-retail","ind-transport","ind-information","ind-finance","ind-scientific","ind-educational","ind-arts","ind-other.industry","ind-public.admin","median.earnings","perc.no.health.insurance")
+mynames <- c("FIPS","county","remove","ind-agric","ind-construc","ind-manufact","ind-wholesale","ind-retail","ind-transport","ind-information","ind-finance","ind-scientific","ind-educational","ind-arts","ind-other.industry","ind-public.admin","median.earnings","perc.no.health.insurance")
 
 ec <- data.table(read.csv(file=dataf))
 ec[,names(ec)[!names(ec) %in% tmp$name] := NULL,with=FALSE]
