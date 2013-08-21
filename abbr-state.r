@@ -1,13 +1,16 @@
 
 
-# make data.table of states names and abbreviationas
-setwd("~/git/Rdata")
+# make data.table of states names, abbreviationas and FIPS codes
 
 library(data.table)
-abbr <- data.table(read.csv("raw/states-abbrev.csv"))
+library(XML)
+url = "http://www.epa.gov/enviro/html/codes/state.html"
+tab <- readHTMLTable(url)
+abbr <- data.table(tab[[1]])
+setnames(abbr,c("State","FIPS","Abbreviation"))
 abbr[,State := as.character(State)]
 abbr[,Abbreviation:= as.character(Abbreviation)]
 
-save(abbr,file="out/states-abbrev.RData")
+save(abbr,file="~/git/Rdata/out/states-abbrev.RData")
 
 
