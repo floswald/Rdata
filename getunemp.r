@@ -59,10 +59,19 @@ colnames(yrz.all) <- st.names
 ydf               <- as.data.frame(yrz.all)
 ydf$year          <- rownames(ydf)
 rownames(ydf)     <- NULL
-m                 <- melt(ydf,id.vars="year")
-names(m)          <- c("Year","State","unemp.rate")
+ydf               <- data.table(ydf)
+m                 <- data.table(melt(ydf,id.vars="year"))
+setnames(m,c("Year","State","unemp.rate"))
+m[,State := toupper(State)]
+setkey(m,State)
 
-unemp <- list(long.mnth=data.table(m),wide.mnth=data.table(ydf),zoo.wide.mnth=yrz.all,long.qtr=data.table(unemp.qtrly))
+# merge in state abbreviations
+load("~/git/Rdata/out/states-abbrev.RData")
+setkey(abbr,State)
+m <- abbr[m]
+setnames(m,c("STATE","State","FIPS","Year","unemp.rate"))
+
+unemp <- list(long.yr=m,wide.yr=data.table(ydf),zoo.wide.yr=yrz.all,long.qtr=data.table(unemp.qtrly))
 
 
 

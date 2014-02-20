@@ -1,7 +1,8 @@
 
 
 # get a dataset of bankruptcy rates by US states over time from a bunch of excel files
-# original data obtained from a query to http://www.abiworld.org/AM/Template.cfm?Section=Filings_by_State1&Template=/TaggedPage/TaggedPageDisplay.cfm&TPLID=61&ContentID=36299
+# original data obtained from a query to 
+# http://www.abiworld.org/AM/Template.cfm?Section=Filings_by_State1&Template=/TaggedPage/TaggedPageDisplay.cfm&TPLID=61&ContentID=36299
 
 rm(list=ls(all=T))
 library(xlsx)
