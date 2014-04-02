@@ -1,6 +1,6 @@
 
 
-CAUTION: to be discontinued
+CAUTION: to be discontinued! Please checkout R package!
 ===========================
 
 This repo is in the process of migrating to an R data package developed at
